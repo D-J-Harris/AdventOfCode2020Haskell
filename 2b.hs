@@ -1,3 +1,4 @@
+import Helper
 import Prelude
 import Text.Parsec hiding(count)
 
@@ -13,14 +14,6 @@ p = do
   string ": "
   s <- many1 letter
   return (read low, read high, c, s)
-
-rights :: [Either a b] -> [b]
-rights (Right x:xs) = x:rights xs
-rights (_:xs) = rights xs
-rights [] = []
-
-count :: Eq a => a -> [a] -> Int
-count c = length . filter (==c)
 
 f :: [(Int, Int, Char, String)] -> Maybe Int
 f xs = Just (count True $ map logic xs)
